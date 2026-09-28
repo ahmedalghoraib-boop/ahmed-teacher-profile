@@ -1,0 +1,16 @@
+# build artifacts - source of truth is the project dir files
+# the /tmp/ahmed-teacher-profile/ was the scratch build dir
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# logs, temp, server
+*.log
+server.log
+
+# misc

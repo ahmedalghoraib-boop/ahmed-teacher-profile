@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Availability — Ahmed Alghoraib</title>
+  <meta name="description" content="Ahmed Alghoraib's teaching availability — weekends, Cairo time. See available 15-minute slots in your own timezone.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true" focusable="false">
+          <defs>
+            <pattern id="geoPattern" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M0 5 L5 0 M5 10 L10 5 M0 0 L5 5 L0 10 M10 0 L5 5 L10 10" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.35"/>
+            </pattern>
+          </defs>
+          <rect width="40" height="40" rx="8" fill="url(#geoPattern)"/>
+          <path d="M20 7 L23 16 L32 16 L25 22 L28 32 L20 26 L12 32 L15 22 L8 16 L17 16 Z" fill="currentColor"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">Ahmed Alghoraib</span>
+          <span class="brand-tagline">Arabic &middot; Quran &middot; Tajweed &middot; Islamics</span>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#subjects">Subjects</a>
+        <a href="index.html#how-lessons-work">How Lessons Work</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html" class="nav-back">&larr; Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="availability-page">
+      <div class="container">
+        <div class="avail-header">
+          <h1 class="section-title">Availability</h1>
+          <p class="avail-intro">
+            I teach on weekends — <strong>Saturday and Sunday</strong> — from <strong>4 PM to 3 AM Cairo time</strong>. The grid below shows my available 15-minute slots converted to your own timezone, so you can see exactly when we could schedule a lesson.
+          </p>
+          <div class="tz-display">
+            <span class="tz-label">Your timezone</span>
+            <span class="tz-value" id="user-tz">—</span>
+          </div>
+        </div>
+
+        <div class="widget-card" id="widget-card">
+          <div class="widget-header">
+            <h2 class="widget-title">Available Slots</h2>
+            <p class="widget-subtitle">Click one or more slots, then choose how to contact me with your booking request.</p>
+          </div>
+
+          <div class="days" id="days-container">
+            <!-- Rendered by script.js -->
+          </div>
+
+          <div class="widget-foot">
+            <p class="widget-note">
+              Times shown in your local timezone. The availability data updates when I update my schedule — refresh the page to see the latest.
+            </p>
+            <p class="widget-prayer-note">
+              Prayer breaks are built into the schedule: <strong>Asr</strong> (4:13–4:58 PM), <strong>Maghrib</strong> (6:46–7:31 PM), and <strong>Isha</strong> (8:04–8:49 PM) Cairo time — shown as unavailable.
+            </p>
+          </div>
+        </div>
+
+        <div id="booking-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+          <div class="modal-backdrop"></div>
+          <div class="modal-panel">
+            <div class="modal-header">
+              <h2 id="modal-title" class="modal-title">Book a Lesson</h2>
+              <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-field">
+                <label class="modal-label" for="modal-name">Your name</label>
+                <input class="modal-input" id="modal-name" name="name" type="text" autocomplete="name" placeholder="Your name">
+              </div>
+              <div class="modal-field">
+                <label class="modal-label" for="modal-subject">Subject</label>
+                <select class="modal-input modal-select" id="modal-subject" name="subject">
+                  <option value="">Select a subject…</option>
+                  <option value="Arabic for English Speakers">Arabic for English Speakers</option>
+                  <option value="Quran Memorization">Quran Memorization</option>
+                  <option value="Tajweed">Tajweed</option>
+                  <option value="Reading Arabic for Kids">Reading Arabic for Kids</option>
+                  <option value="Islamics">Islamics</option>
+                </select>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label" for="modal-timezone">Your timezone</label>
+                <input class="modal-input" id="modal-timezone" name="timezone" type="text" readonly tabindex="-1">
+              </div>
+              <div class="modal-field">
+                <label class="modal-label" for="modal-slots">Selected slots <span class="modal-label-hint">(in your timezone)</span></label>
+                <textarea class="modal-input modal-textarea" id="modal-slots" name="slots" rows="3" readonly tabindex="-1" placeholder="No slots selected yet"></textarea>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label">Contact method</label>
+                <div class="contact-method-group" id="contact-group">
+                  <label class="method-option">
+                    <input type="radio" name="contact-method" value="email" checked>
+                    <span class="method-radio"></span>
+                    <span class="method-label">Email — opens your email app</span>
+                  </label>
+                  <label class="method-option">
+                    <input type="radio" name="contact-method" value="whatsapp">
+                    <span class="method-radio"></span>
+                    <span class="method-label">WhatsApp — opens WhatsApp with a pre-filled message</span>
+                  </label>
+                  <label class="method-option">
+                    <input type="radio" name="contact-method" value="telegram">
+                    <span class="method-radio"></span>
+                    <span class="method-label">Telegram — shows my handle; copy the message and send it</span>
+                  </label>
+                  <label class="method-option">
+                    <input type="radio" name="contact-method" value="preply">
+                    <span class="method-radio"></span>
+                    <span class="method-label">Preply — opens my Preply profile</span>
+                  </label>
+                </div>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label" for="modal-message">Message</label>
+                <textarea class="modal-input modal-textarea" id="modal-message" name="message" rows="4" placeholder="Edit this message before sending"></textarea>
+              </div>
+              <div class="modal-actions">
+                <button class="btn btn-secondary" id="modal-send">Send Message</button>
+                <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 40 40" width="20" height="20" aria-hidden="true">
+          <defs>
+            <pattern id="geoPatternFooter2" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M0 5 L5 0 M5 10 L10 5 M0 0 L5 5 L0 10 M10 0 L5 5 L10 10" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="40" height="40" rx="8" fill="url(#geoPatternFooter2)"/>
+          <path d="M20 7 L23 16 L32 16 L25 22 L28 32 L20 26 L12 32 L15 22 L8 16 L17 16 Z" fill="currentColor"/>
+        </svg>
+        <span>&copy; 2026 Ahmed Alghoraib. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => renderAvailabilityPage());
+  </script>
+</body>
+</html>
