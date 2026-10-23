@@ -11,6 +11,10 @@
 
 const AVAILABILITY_URL = 'availability.json';
 
+// Cache-busting version — update when availability.json changes to force refresh.
+// Can be a timestamp, hash, or incrementing number.
+const AVAILABILITY_VERSION = '20260928';
+
 // Inline fallback data — used when fetch fails (e.g. opening via file://).
 // Kept in sync with availability.json. When fetch works (localhost / GitHub Pages),
 // this is never used.
@@ -38,13 +42,13 @@ const INLINE_AVAILABILITY_DATA = {
   },
   "slots": {
     "Saturday": [
-      65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82,
+      67, 68, 69, 70, 71, 72, 73, 74, 78, 79,
       83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
     ],
     "Sunday": [
       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
       67, 68, 69, 70, 71, 72, 73, 74, 78, 79,
-      80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+      83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
     ]
   }
 };
@@ -137,7 +141,8 @@ function formatTimezoneName(tz) {
 
 async function loadAvailability() {
   try {
-    const resp = await fetch(AVAILABILITY_URL, { cache: 'no-cache' });
+    const url = `${AVAILABILITY_URL}?v=${AVAILABILITY_VERSION}`;
+    const resp = await fetch(url, { cache: 'no-cache' });
     if (!resp.ok) throw new Error(`availability.json returned ${resp.status}`);
     const data = await resp.json();
     return data;
@@ -563,7 +568,7 @@ function sendBooking() {
       showTelegramFallback(message);
       break;
     case 'preply':
-      window.location.href = 'https://preply.in/AHMED6EN1434201102?ts=17905441';
+      window.location.href = 'https://preply.in/AHMED6EN1434201102?ts=17924484';
       break;
     default:
       break;
@@ -646,28 +651,10 @@ function showTelegramFallback(message) {
 /* ---- Cairo → local time conversion for the modal ---- */
 
 function cairoToLocal(cairoHours, cairoMinutes) {
-  // Build a Cairo-time Date for today at the given hours/minutes,
-  // then read it back in the user's timezone. We use a fixed reference
-  // date to avoid DST ambiguity — use 2026-09-28 as the anchor
-  // (a date near now, mid-September, when Cairo is on EET/UTC+3
-  //  if DST is observed, or EEST/UTC+2 otherwise — the offset is
-  //  computed automatically by Intl).
-  const anchor = '2026-09-28T';
-  const cairoTime = `${String(cairoMinutes).padStart(2,'0')}`;
-  // Use the format that Intl can parse: "2026-09-28T16:00:00"
-  // We'll build it as a local-time interpretation first, but we want
-  // Cairo time. Simplest robust approach: create a Date in UTC at the
-  // same wall-clock time and then shift by Cairo's offset. But Cairo's
-  // offset varies. Instead: construct an ISO string as if it were UTC,
-  // then ask Intl for the difference.
-  //
-  // Robust method: build a Date from an ISO string interpreted as UTC,
-  // then format it in Cairo to verify, and in user TZ for display.
-  // We'll use the "ISO as UTC" trick:
-  const isoUTC = `2026-09-28T${String(cairoMinutes).padStart(2,'0')}`;
-  // "2026-09-28THH:MM:SSZ"
-  const iso = `2026-09-28T${String(cairoHours).padStart(2,'0')}:${cairoTime}:00Z`
-  const asUTC = new Date(iso);
+  // Build an ISO string in UTC that represents the same wall-clock time in Cairo.
+  // Use a fixed anchor date (2026-09-28) to avoid DST ambiguity.
+  const iso = `2026-09-28T${String(cairoHours).padStart(2,'0')}:${String(cairoMinutes).padStart(2,'0')}:00`
+  const asUTC = new Date(iso + 'Z');
 
   // Now format that instant in the user's timezone.
   const userTZ = getTimezoneName();

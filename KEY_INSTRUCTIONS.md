@@ -8,7 +8,7 @@
 - **Owner:** Ahmed Alghoraib
 - **GitHub account:** `ahmedalghoraib-boop` (PAT in `~/.hermes/.env` — `GITHUB_TOKEN` + `GITHUB_PAT` both present; `gh` CLI already logged in locally as `ahmedalghoraib-boop`)
 - **Home dir:** `/Users/ahmed.alghoraib`
-- **Project dir:** `/Users/ahmed.alghoraib/Teacher-Website` (created 2026-09-28)
+- **Project dir:** `/Users/ahmed.alghoraib/Documents/Teacher Website` (Astro project, created 2026-09-28; migrated from the legacy `/Users/ahmed.alghoraib/Teacher-Website` scratch dir)
 - **Local build dir (scratch, move to project dir before push):** `/tmp/ahmed-teacher-profile/`
 
 ---
@@ -100,7 +100,7 @@
 - **Email:** ahmed.alghoraib@gmail.com
 - **Telegram:** @Alghoraib
 - **WhatsApp:** 01117740036
-- **Preply profile:** https://preply.in/AHMED6EN1434201102?ts=17905441 (Ahmed's actual active Preply profile — confirmed)
+- **Preply profile:** https://preply.in/AHMED6EN1434201102?ts=17924484 (Ahmed's actual active Preply profile — confirmed)
 
 All four wanted on the site.
 
@@ -136,7 +136,7 @@ All four wanted on the site.
 
 ## 8. Website language & theme
 
-- **Language:** English only.
+- **Language:** Bilingual — English (primary content) with Arabic headings, UI elements, and examples throughout.
 - **Theme direction (drafted, awaiting visual confirmation):** warm cream/sand background, deep teal accent, charcoal text, muted text. Headings in Cormorant Garamond, body in Source Sans 3 (both Google Fonts, free). Light geometric tile pattern as CSS background on header/footer (subtle, low opacity). Small inline SVG star/crescent mark as favicon and as a small footer accent. Not kitschy — modern, clean, organized, detailed-orientated. Ahmed said he wants to see it before deciding, so the real test is opening the local build.
 
 ---
