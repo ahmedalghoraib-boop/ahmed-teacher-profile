@@ -34,6 +34,24 @@
 - `http://localhost:8080/index.html` — homepage.
 - `http://localhost:8080/availability.html` — availability page.
 
+**5. Bug fixes & data sync (2026-10-23)**
+- Fixed Telegram link in `index.html` (was pointing to WhatsApp, now `t.me/Alghoraib`).
+- Fixed `cairoToLocal()` timezone conversion bug in `script.js` (was discarding hours, now builds correct ISO string).
+- Synced inline fallback data in `script.js` with `availability.json` (prayer breaks correctly excluded from available slots).
+- Added cache-busting version param (`?v=20260928`) to availability JSON fetch.
+
+**6. Git init + commit (2026-10-23)**
+- Git already initialized in project dir.
+- Committed fixes: `14be67a` "Fix: Telegram link, timezone conversion, inline data sync, cache busting".
+
+**7. GitHub repos + push (2026-10-23)**
+- Created `ahmedalghoraib-boop/ahmed-teacher-profile` (public) — pushed site.
+- Created `ahmedalghoraib-boop/teaching-materials` (public) — pushed skeleton with per-subject folders.
+
+**8. GitHub Pages enabled (2026-10-23)**
+- Enabled on `ahmed-teacher-profile` from `main` branch, root path.
+- Live at: https://ahmedalghoraib-boop.github.io/ahmed-teacher-profile/
+
 ### Not done
 
 **A. Visual review — WAITING ON AHMED**
@@ -89,4 +107,4 @@
 
 ---
 
-*Last updated: 2026-09-28. Next update: after Ahmed reviews the live build.*
+*Last updated: 2026-10-23. All deployment steps complete. Site live at https://ahmedalghoraib-boop.github.io/ahmed-teacher-profile/*
